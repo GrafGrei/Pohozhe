@@ -4,4 +4,6 @@
     <string name="cloudy">Cloudy</string>
     <string name="hourlyforecast">Hourly Forecast</string>
     <string name="now">now</string>
+    <string name="today">today</string>
+    <string name="daysforecast">5-day forecast</string>
 </resources>

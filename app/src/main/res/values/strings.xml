@@ -8,4 +8,6 @@
     <string name="DegreesEN" translatable="false">"degrees Celsius "</string>
     <string name="hourlyforecast">Hourly Forecast</string>
     <string name="now">now</string>
+    <string name="today">today</string>
+    <string name="daysforecast">5-day forecast</string>
 </resources>

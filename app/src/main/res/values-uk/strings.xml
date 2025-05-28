@@ -4,4 +4,6 @@
     <string name="cloudy">Хмарно</string>
     <string name="hourlyforecast">Погодинний прогноз</string>
     <string name="now">зараз</string>
+    <string name="today">сьогодні</string>
+    <string name="daysforecast">Прогноз на 5 днів</string>
 </resources>
