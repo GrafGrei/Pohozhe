@@ -6,4 +6,6 @@
     <string name="DegreeUKsiv" translatable="false">градусів за Цельсієм</string>
     <string name="DegreeEN" translatable="false">"degree Celsius "</string>
     <string name="DegreesEN" translatable="false">"degrees Celsius "</string>
+    <string name="hourlyforecast">Hourly Forecast</string>
+    <string name="now">now</string>
 </resources>

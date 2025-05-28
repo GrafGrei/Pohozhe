@@ -97,6 +97,6 @@ fun CurrentTemperatureBlock(modifier: Modifier = Modifier, current_temperature: 
 @Composable
 fun PreviewCurrentTemperatureBlock(){
     PohozheTheme {
-        CurrentTemperatureBlock(current_temperature = 20)
+        CurrentTemperatureBlock(current_temperature = 21)
     }
 }

@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Погоже</string>
     <string name="cloudy">Хмарно</string>
+    <string name="hourlyforecast">Погодинний прогноз</string>
+    <string name="now">зараз</string>
 </resources>
