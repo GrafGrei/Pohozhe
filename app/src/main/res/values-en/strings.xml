@@ -6,4 +6,6 @@
     <string name="now">now</string>
     <string name="today">today</string>
     <string name="daysforecast">5-day forecast</string>
+    <string name="wind">Wind</string>
+    <string name="ms">m/s</string>
 </resources>
