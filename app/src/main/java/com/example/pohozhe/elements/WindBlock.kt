@@ -91,7 +91,6 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
                 .fillMaxHeight()
         )
         Box(
-            
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1F),

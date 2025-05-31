@@ -17,4 +17,5 @@
     <string name="humidity">Вологість</string>
     <string name="precipitation">Опади</string>
     <string name="mm">мм</string>
+    <string name="uvindex">УФ-індекс</string>
 </resources>
