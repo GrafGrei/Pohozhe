@@ -113,10 +113,10 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "пн",
+                        text = stringResource(R.string.south),
                         modifier = Modifier,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.geologica)),
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onTertiary,
@@ -131,9 +131,9 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "пд",
+                        text = stringResource(R.string.north),
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.geologica)),
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onTertiary,
@@ -148,9 +148,9 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "сх",
+                        text = stringResource(R.string.east),
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.geologica)),
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onTertiary,
@@ -165,9 +165,9 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "зх",
+                        text = stringResource(R.string.west),
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.geologica)),
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.onTertiary,
@@ -224,12 +224,12 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
 }
 
 
-@Preview
+@Preview(locale = "UK")
 @Composable
 fun PreviewWindBlock(){
     PohozheTheme {
         WindBlock(
-           windData = Wind(15, 222.1)
+           windData = Wind(5, 23.1)
         )
     }
 }

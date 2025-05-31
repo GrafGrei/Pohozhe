@@ -19,9 +19,9 @@ import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun ChangeLocationButton(modifier: Modifier = Modifier){
+fun ChangeLocationButton(modifier: Modifier = Modifier, onClickFunction: ()-> Unit){
     IconButton(
-        onClick = {},
+        onClick = onClickFunction,
         modifier = modifier
             .border(
                 width = 1.dp,
@@ -51,7 +51,9 @@ fun ChangeLocationButton(modifier: Modifier = Modifier){
 @Composable
 fun PreviewChangeLocationButton(){
     PohozheTheme {
-        ChangeLocationButton()
+        ChangeLocationButton {
+
+        }
     }
 }
 

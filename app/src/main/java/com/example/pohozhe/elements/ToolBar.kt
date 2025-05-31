@@ -18,7 +18,9 @@ fun ToolBar(modifier: Modifier = Modifier, curent_location:String){
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.height(48.dp)
     ) {
-        ChangeLocationButton()
+        ChangeLocationButton() {
+
+        }
         CurrentLocationText(Modifier, curent_location)
         Spacer(
             modifier = Modifier

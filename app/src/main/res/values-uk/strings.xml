@@ -8,4 +8,13 @@
     <string name="daysforecast">Прогноз на 5 днів</string>
     <string name="wind">Вітер</string>
     <string name="ms">м/с</string>
+    <string name="north">ПН</string>
+    <string name="south">ПД</string>
+    <string name="east">СХ</string>
+    <string name="west">ЗХ</string>
+    <string name="pressure">Тиск</string>
+    <string name="hpa">гПа</string>
+    <string name="humidity">Вологість</string>
+    <string name="precipitation">Опади</string>
+    <string name="mm">мм</string>
 </resources>

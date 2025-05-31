@@ -8,4 +8,13 @@
     <string name="daysforecast">5-day forecast</string>
     <string name="wind">Wind</string>
     <string name="ms">m/s</string>
+    <string name="north">N</string>
+    <string name="south">S</string>
+    <string name="east">E</string>
+    <string name="west">W</string>
+    <string name="pressure">Pressure</string>
+    <string name="hpa">hPa</string>
+    <string name="humidity">Humidity</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="mm">mm</string>
 </resources>
