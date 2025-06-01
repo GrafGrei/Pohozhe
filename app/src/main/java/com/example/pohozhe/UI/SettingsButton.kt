@@ -1,4 +1,4 @@
-package com.example.pohozhe.elements
+package com.example.pohozhe.UI
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,9 +19,9 @@ import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun ChangeLocationButton(modifier: Modifier = Modifier, onClickFunction: ()-> Unit){
+fun SettingsButton(modifier: Modifier = Modifier){
     IconButton(
-        onClick = onClickFunction,
+        onClick = {},
         modifier = modifier
             .border(
                 width = 1.dp,
@@ -37,7 +37,7 @@ fun ChangeLocationButton(modifier: Modifier = Modifier, onClickFunction: ()-> Un
             .padding(13.dp),
     ) {
         Icon(
-            painter = painterResource(R.drawable.location_ico),
+            painter = painterResource(R.drawable.setings_ico),
             contentDescription = null,
             modifier = Modifier
                 .width(22.dp)
@@ -49,13 +49,8 @@ fun ChangeLocationButton(modifier: Modifier = Modifier, onClickFunction: ()-> Un
 
 @Preview(widthDp = 48, heightDp = 48)
 @Composable
-fun PreviewChangeLocationButton(){
+fun PreviewSettingsButton(){
     PohozheTheme {
-        ChangeLocationButton {
-
-        }
+        SettingsButton()
     }
 }
-
-
-

@@ -1,10 +1,10 @@
-package com.example.pohozhe.elements
+package com.example.pohozhe.UI
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
@@ -26,14 +26,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pohozhe.DataProcessing.getLocalizedDegreesText
+import com.example.pohozhe.dataclasses.WetherState
 import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun CurrentTemperatureBlock(modifier: Modifier = Modifier, current_temperature: Int) {
+fun CurrenWetherBlock(modifier: Modifier = Modifier, wether_state: WetherState){
     Column(
-        verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.Top),
+        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .aspectRatio(1F)
@@ -42,50 +42,35 @@ fun CurrentTemperatureBlock(modifier: Modifier = Modifier, current_temperature: 
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 shape = RoundedCornerShape(size = 24.dp)
             )
+            .aspectRatio(1F)
             .background(
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(size = 24.dp)
             )
             .padding(top = 22.dp, bottom = 20.dp)
     ) {
-        Spacer(
-            modifier = Modifier.weight(0.05f)
-        )
-        Text(
-            text = current_temperature.toString(),
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.geologica)),
-                fontWeight = FontWeight(900),
-                color = MaterialTheme.colorScheme.tertiary,
-                textAlign = TextAlign.Center,
-                platformStyle = PlatformTextStyle(
-                    includeFontPadding = false
-                ),
-            ),
-            fontSize = 76.sp,
+        Image(
+            painter = painterResource(id = wether_state.Ico),
+            contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth()
-        )
-        Spacer(
-            modifier = Modifier.weight(1f)
+                .aspectRatio(1F)
+                .weight(1F)
+
         )
         Text(
-            text = stringResource(getLocalizedDegreesText(
-                LocalContext.current.resources.configuration.locales[0],
-                current_temperature
-            )),
+            text = wether_state.Text,
             style = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 10.sp,
+                lineHeight = 14.sp,
                 fontFamily = FontFamily(Font(R.font.geologica)),
                 fontWeight = FontWeight(500),
                 color = MaterialTheme.colorScheme.tertiary,
-                textAlign = TextAlign.Center,
                 platformStyle = PlatformTextStyle(
                     includeFontPadding = false
                 ),
+                textAlign = TextAlign.Center
             ),
-            modifier =  Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(20.dp)
         )
@@ -93,10 +78,13 @@ fun CurrentTemperatureBlock(modifier: Modifier = Modifier, current_temperature: 
 }
 
 
-@Preview(widthDp = 190, heightDp = 190, locale = "UK")
+@Preview(widthDp = 190, heightDp = 190)
 @Composable
-fun PreviewCurrentTemperatureBlock(){
+fun PreviewCurrenWetherBlock(){
     PohozheTheme {
-        CurrentTemperatureBlock(current_temperature = 2)
+        CurrenWetherBlock(wether_state = WetherState(
+            Text = stringResource(R.string.cloudy),
+            Ico = R.drawable.cloudy_wether_ico
+        ))
     }
 }

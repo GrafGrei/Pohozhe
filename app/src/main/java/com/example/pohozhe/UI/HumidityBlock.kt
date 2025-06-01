@@ -1,4 +1,4 @@
-package com.example.pohozhe.elements
+package com.example.pohozhe.UI
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +32,7 @@ import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun HuminidyBlock(modifier: Modifier=Modifier, currentPressure: Int){
+fun HumidityBlock(modifier: Modifier=Modifier, currentHumidity: Int){
     Column(
         verticalArrangement = Arrangement.spacedBy(0.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,14 +57,14 @@ fun HuminidyBlock(modifier: Modifier=Modifier, currentPressure: Int){
                 .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.pressure_ico),
+                painter = painterResource(id = R.drawable.hyminidy_ico),
                 contentDescription = "image description",
                 modifier = Modifier
                     .width(22.dp)
                     .height(22.dp)
             )
             Text(
-                text = stringResource(R.string.pressure),
+                text = stringResource(R.string.humidity),
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 14.sp,
@@ -85,7 +85,7 @@ fun HuminidyBlock(modifier: Modifier=Modifier, currentPressure: Int){
                 .fillMaxHeight()
         ) {
             Text(
-                text = currentPressure.toString(),
+                text = currentHumidity.toString(),
                 style = TextStyle(
                     fontSize = 36.sp,
                     lineHeight = 14.sp,
@@ -102,7 +102,7 @@ fun HuminidyBlock(modifier: Modifier=Modifier, currentPressure: Int){
                     .weight(1f)
             )
             Text(
-                text = stringResource(R.string.hpa),
+                text = "%",
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 14.sp,
@@ -124,12 +124,10 @@ fun HuminidyBlock(modifier: Modifier=Modifier, currentPressure: Int){
 
 @Preview(widthDp = 190)
 @Composable
-fun PreviewPressureBlock(){
+fun PreviewHumidityBlock(){
     PohozheTheme {
-        HuminidyBlock(
-            currentPressure = 1000
+        HumidityBlock(
+            currentHumidity = 100
         )
     }
 }
-
-

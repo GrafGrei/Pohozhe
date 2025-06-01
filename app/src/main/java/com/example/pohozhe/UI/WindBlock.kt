@@ -1,4 +1,4 @@
-package com.example.pohozhe.elements
+package com.example.pohozhe.UI
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image

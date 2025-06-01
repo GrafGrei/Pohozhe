@@ -1,4 +1,4 @@
-package com.example.pohozhe.elements
+package com.example.pohozhe.UI
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

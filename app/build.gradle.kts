@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.pohozhe"
-        minSdk = 24
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("com.github.skydoves:cloudy:0.2.7")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
