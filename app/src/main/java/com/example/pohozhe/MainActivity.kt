@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.res.stringResource
 import androidx.core.view.WindowCompat
 import com.example.pohozhe.DataProcessing.getStatusAndNavBarHeight
-import com.example.pohozhe.UI.MainView
+import com.example.pohozhe.views.MainView
 import com.example.pohozhe.dataclasses.DayWhether
 import com.example.pohozhe.dataclasses.HourlyWhether
 import com.example.pohozhe.dataclasses.WetherState
@@ -26,9 +26,9 @@ class MainActivity : ComponentActivity() {
                 val (topInsetPx, bottomInsetPx) = getStatusAndNavBarHeight()
                 MainView(
                     whetherData =  WhetherData(
-                        WetherState("Хмарно", R.drawable.cloudy_wether_ico),
-                        19,
-                        listOf(
+                        state =  WetherState("Хмарно", R.drawable.cloudy_wether_ico),
+                        temp = 19,
+                        hours = listOf(
                             HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                             HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                             HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
@@ -43,22 +43,24 @@ class MainActivity : ComponentActivity() {
                             HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                             HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                         ),
-                        listOf(
+                        days = listOf(
                             DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                             DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                             DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                             DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                             DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
                         ),
-                        12,
-                        0.3F,
-                        Wind(10, 122.2),
-                        5,
-                        1222
+                        huminidy = 12,
+                        rayny = 0.3F,
+                        wind = Wind(10, 122.2),
+                        uv_index = 5,
+                        pressure = 1222
                     ),
                     currentLocation = "Talne",
                     statusPadding = topInsetPx,
-                    bottomPadding = bottomInsetPx
+                    bottomPadding = bottomInsetPx,
+                    changeLocationFunction = {},
+                    settingsFunction = {}
                 )
             }
         }

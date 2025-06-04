@@ -2,6 +2,7 @@ package com.example.pohozhe.UI
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -25,41 +26,50 @@ import com.example.pohozhe.R
 
 
 @Composable
-fun CurrentLocationText(modifier: Modifier = Modifier, current_location:String){
+fun CurrentLocationText(
+    modifier: Modifier = Modifier,
+    currentLocation: String,
+    onClickFunction: () -> Unit
+) {
     Text(
-        text = current_location,
+        text = currentLocation,
         style = TextStyle(
             fontSize = 24.sp,
             lineHeight = 14.sp,
             fontFamily = FontFamily(Font(R.font.geologica)),
             color = MaterialTheme.colorScheme.tertiary,
-            platformStyle = PlatformTextStyle(
-                includeFontPadding = false
-            ),
+            platformStyle = PlatformTextStyle(includeFontPadding = false),
             textAlign = TextAlign.Center,
         ),
         modifier = modifier
-            .padding(start = 8.dp)
             .fillMaxHeight()
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                shape = RoundedCornerShape(size = 24.dp)
+            .then(
+                Modifier
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .background(
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .padding(horizontal = 17.dp)
+                    .clickable(onClick = onClickFunction)
             )
-            .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                shape = RoundedCornerShape(size = 24.dp)
-            )
-            .wrapContentHeight(Alignment.CenterVertically)
-            .padding(horizontal = 17.dp)
     )
 }
+
+
 
 
 @Preview(heightDp = 48)
 @Composable
 fun PreviewCurrentLocationText(){
     PohozheTheme {
-        CurrentLocationText(current_location = "Тальне")
+        CurrentLocationText(currentLocation = "Тальне"){
+
+        }
     }
 }

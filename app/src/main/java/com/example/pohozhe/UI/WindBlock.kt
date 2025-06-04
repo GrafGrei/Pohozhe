@@ -228,7 +228,7 @@ fun WindBlock(modifier: Modifier = Modifier, windData: Wind) {
 fun PreviewWindBlock(){
     PohozheTheme {
         WindBlock(
-           windData = Wind(5, 23.1)
+           windData = Wind(57, 293.1)
         )
     }
 }

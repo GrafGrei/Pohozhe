@@ -1,5 +1,6 @@
-package com.example.pohozhe.UI
+package com.example.pohozhe.views
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,13 +13,15 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Alignment
-import androidx.compose.material3.Text
-
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.pohozhe.R
+import com.example.pohozhe.UI.MainSlide
+import com.example.pohozhe.UI.ToolBar
 import com.example.pohozhe.dataclasses.DayWhether
 import com.example.pohozhe.dataclasses.HourlyWhether
 import com.example.pohozhe.dataclasses.WetherState
@@ -29,7 +32,14 @@ import com.skydoves.cloudy.cloudy
 
 
 @Composable
-fun MainView(modifier: Modifier = Modifier,statusPadding: Int, bottomPadding: Int, whetherData: WhetherData , currentLocation: String){
+fun MainView(modifier: Modifier = Modifier,
+             statusPadding: Int,
+             bottomPadding: Int,
+             whetherData: WhetherData,
+             currentLocation: String,
+             changeLocationFunction: () -> Unit,
+             settingsFunction: () -> Unit
+){
     Scaffold(
         modifier = modifier
             .fillMaxWidth(),
@@ -44,7 +54,9 @@ fun MainView(modifier: Modifier = Modifier,statusPadding: Int, bottomPadding: In
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
                         .offset(y = statusPadding.dp),
-                    curent_location = currentLocation
+                    currentLocation  = currentLocation,
+                    changeLocationFunction = changeLocationFunction,
+                    settingsFunction = settingsFunction
                 )
             }
         }
@@ -55,6 +67,12 @@ fun MainView(modifier: Modifier = Modifier,statusPadding: Int, bottomPadding: In
                 .fillMaxSize(),
             contentAlignment = Alignment.TopCenter,
         ){
+            Image(
+                painter = painterResource(id = R.drawable.test_bg),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
             MainSlide(
                 modifier = Modifier
                     .padding(horizontal = 10.dp),
@@ -108,9 +126,9 @@ fun PreviewMainView() {
     PohozheTheme {
         MainView(
             whetherData =  WhetherData(
-                WetherState("Хмарно", R.drawable.cloudy_wether_ico),
-                19,
-                listOf(
+                state =  WetherState("Хмарно", R.drawable.cloudy_wether_ico),
+                temp = 19,
+                hours = listOf(
                     HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                     HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                     HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
@@ -125,22 +143,24 @@ fun PreviewMainView() {
                     HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                     HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
                 ),
-                listOf(
+                days = listOf(
                     DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                     DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                     DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                     DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
                     DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
                 ),
-                12,
-                0.3F,
-                Wind(10, 122.2),
-                5,
-                1222
+                huminidy = 12,
+                rayny = 0.3F,
+                wind = Wind(10, 122.2),
+                uv_index = 5,
+                pressure = 1222
             ),
             currentLocation = "Talne",
             statusPadding = 68,
-            bottomPadding = 40
+            bottomPadding = 40,
+            changeLocationFunction = {},
+            settingsFunction = {}
         )
     }
 }

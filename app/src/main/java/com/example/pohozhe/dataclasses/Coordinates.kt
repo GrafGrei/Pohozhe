@@ -1,6 +1,6 @@
 package com.example.pohozhe.dataclasses
 
-data class Cordinates(
+data class Coordinates(
     val lat: Double,
     val lon: Double
 )

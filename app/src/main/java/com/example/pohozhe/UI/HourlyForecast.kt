@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pohozhe.dataclasses.HourlyWhether
 import com.example.pohozhe.R
+import com.skydoves.cloudy.cloudy
 
 @Composable
 fun HourlyForecast(modifier: Modifier = Modifier, hours: List<HourlyWhether>) {

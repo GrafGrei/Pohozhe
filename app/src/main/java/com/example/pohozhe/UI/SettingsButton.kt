@@ -19,9 +19,9 @@ import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun SettingsButton(modifier: Modifier = Modifier){
+fun SettingsButton(modifier: Modifier = Modifier, onClickFunction: () -> Unit){
     IconButton(
-        onClick = {},
+        onClick = onClickFunction,
         modifier = modifier
             .border(
                 width = 1.dp,
@@ -51,6 +51,6 @@ fun SettingsButton(modifier: Modifier = Modifier){
 @Composable
 fun PreviewSettingsButton(){
     PohozheTheme {
-        SettingsButton()
+        SettingsButton(){}
     }
 }

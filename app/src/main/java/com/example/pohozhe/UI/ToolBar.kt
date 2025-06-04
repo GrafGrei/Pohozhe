@@ -12,21 +12,25 @@ import androidx.compose.ui.unit.dp
 import com.example.pohozhe.ui.theme.PohozheTheme
 
 @Composable
-fun ToolBar(modifier: Modifier = Modifier, curent_location:String){
+fun ToolBar(modifier: Modifier = Modifier, currentLocation:String, changeLocationFunction: () -> Unit, settingsFunction: () -> Unit,){
     Row(
-        horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.height(48.dp)
     ) {
-        ChangeLocationButton() {
-
-        }
-        CurrentLocationText(Modifier, curent_location)
+        ChangeLocationButton(
+            onClickFunction = changeLocationFunction
+        )
+        CurrentLocationText(Modifier, currentLocation,
+            onClickFunction = changeLocationFunction
+        )
         Spacer(
             modifier = Modifier
                 .weight(1f)
         )
-        SettingsButton()
+        SettingsButton(
+            onClickFunction = settingsFunction
+        )
     }
 }
 
@@ -34,6 +38,12 @@ fun ToolBar(modifier: Modifier = Modifier, curent_location:String){
 @Composable
 fun PreviewToolBar(){
     PohozheTheme {
-        ToolBar(curent_location = "Тальне")
+        ToolBar(currentLocation = "Тальне",
+            changeLocationFunction = {
+
+            },
+            settingsFunction = {
+
+            })
     }
 }
