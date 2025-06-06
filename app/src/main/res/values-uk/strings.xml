@@ -18,4 +18,5 @@
     <string name="precipitation">Опади</string>
     <string name="mm">мм</string>
     <string name="uvindex">УФ-індекс</string>
+    <string name="locations">Місця</string>
 </resources>
