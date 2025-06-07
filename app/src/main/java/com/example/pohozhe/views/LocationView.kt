@@ -2,16 +2,20 @@ package com.example.pohozhe.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -22,14 +26,6 @@ import com.example.pohozhe.R
 import com.example.pohozhe.UI.LocationListItem
 import com.example.pohozhe.UI.SearchButton
 import com.example.pohozhe.UI.SecondaryToolBar
-import com.example.pohozhe.dataclasses.Coordinates
-import com.example.pohozhe.dataclasses.DayWhether
-import com.example.pohozhe.dataclasses.HourlyWhether
-import com.example.pohozhe.dataclasses.Location
-import com.example.pohozhe.dataclasses.LocationItem
-import com.example.pohozhe.dataclasses.WetherState
-import com.example.pohozhe.dataclasses.WhetherData
-import com.example.pohozhe.dataclasses.Wind
 import com.example.pohozhe.ui.theme.PohozheTheme
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -37,15 +33,22 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pohozhe.MainViewModel
+import com.example.pohozhe.dataclasses.LocationCurrentWhetherState
+import com.example.pohozhe.dataclasses.PaddingState
 
 @Composable
 fun LocationView(
     modifier: Modifier = Modifier,
-    statusPading: Int,
     returnFunction: ()-> Unit,
-    currentLocation: LocationItem? = null,
-    locationsList: Array<LocationItem>? = null
+    SearchButtonClick: ()-> Unit,
+    viewModel: MainViewModel = viewModel()
 ) {
+    val currentLocation = viewModel.currentLocation
+    val currentLocationWhetherState = viewModel.currentLocationWetherState
+    val locations = viewModel.locationsList
+    val paddingState = viewModel.paddingState?: PaddingState(0,0)
     Box(
         modifier = Modifier.background(Color(0xFF131313))
     ){
@@ -53,32 +56,50 @@ fun LocationView(
             containerColor = Color(0xFF131313),
             modifier = modifier
                 .padding(top = 6.dp)
-                .padding(top = statusPading.dp),
+                .padding(top = paddingState.top.dp),
             topBar = {
                 SecondaryToolBar(
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp),
                     label = stringResource(R.string.locations),
                     returnFunction = returnFunction
                 )
             },
             bottomBar = {
                 Column(
-
+                    verticalArrangement = Arrangement.spacedBy(0.dp, Alignment.Top),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .border(width = 1.dp, color = Color(0x1700010F), shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp))
+                        .background(color = Color(0x663D3D3D), shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp))
+                        .padding(bottom = paddingState.bottom.dp)
+                        .padding(horizontal = 15.dp)
+                        .padding(top = 15.dp)
                 ) {
-                    SearchButton()
+                    SearchButton(
+                        modifier = Modifier
+                            .clickable(onClick = SearchButtonClick)
+                    )
                 }
             }
         ) { innerPading ->
             Column(
-                Modifier.padding(innerPading)
+                verticalArrangement = Arrangement.spacedBy(30.dp, Alignment.Top),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier =  Modifier
+                    .padding(innerPading)
+                    .padding(horizontal = 20.dp)
             ) {
                 if (currentLocation != null) {
                     Column(
+                        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
+                        horizontalAlignment = Alignment.Start,
                         modifier = Modifier
                             .padding(top = 30.dp)
                     ) {
                         Row(
-
+                            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.curent_location_ico),
@@ -100,26 +121,54 @@ fun LocationView(
                             )
                         }
                         Column(
-
+                            verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             LocationListItem(
                                 modifier = Modifier,
-                                location = currentLocation
+                                location = currentLocation,
+                                whetherData = currentLocationWhetherState
                             )
                         }
                     }
                 }
-                if (locationsList != null) {
+                if (locations != null) {
                     Column(
-
+                        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
+                        horizontalAlignment = Alignment.Start
                     ) {
-                        Column(
-
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            for (item in locationsList) {
+                            Image(
+                                painter = painterResource(id = R.drawable.locations_ico),
+                                contentDescription = "image description",
+                                contentScale = ContentScale.None,
+                                modifier = Modifier
+                                    .width(22.dp)
+                                    .height(22.dp)
+                            )
+                            Text(
+                                text = "Збережені місця",
+                                style = TextStyle(
+                                    fontSize = 20.sp,
+                                    lineHeight = 14.sp,
+                                    fontFamily = FontFamily(Font(R.font.geologica)),
+                                    fontWeight = FontWeight(500),
+                                    color = Color(0xFFFFFFFF),
+                                )
+                            )
+                        }
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            for (item in locations) {
                                 LocationListItem(
                                     modifier = Modifier,
-                                    location = item
+                                    location = item.first,
+                                    whetherData = item.second
                                 )
                             }
                         }
@@ -137,49 +186,8 @@ fun PreviewLocationView(){
     PohozheTheme {
         LocationView(
             modifier = Modifier,
-            statusPading =40,
-            currentLocation = LocationItem(
-                Location(
-                    "Talne",
-                    Coordinates(
-                        12.231,
-                        21.213
-                    )
-                ),
-                WhetherData(
-                    state =  WetherState("Хмарно", R.drawable.cloudy_wether_ico),
-                    temp = 19,
-                    hours = listOf(
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                    ),
-                    days = listOf(
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
-                    ),
-                    huminidy = 12,
-                    rayny = 0.3F,
-                    wind = Wind(10, 122.2),
-                    uv_index = 5,
-                    pressure = 1222
-                )
-            ),
-            locationsList = null,
-            returnFunction = {}
+            returnFunction = {},
+            SearchButtonClick= {}
         )
     }
 }

@@ -1,68 +1,76 @@
 package com.example.pohozhe
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.pohozhe.DataProcessing.getStatusAndNavBarHeight
+import com.example.pohozhe.dataclasses.Coordinates
 import com.example.pohozhe.views.MainView
 import com.example.pohozhe.dataclasses.DayWhether
 import com.example.pohozhe.dataclasses.HourlyWhether
+import com.example.pohozhe.dataclasses.Location
+import com.example.pohozhe.dataclasses.PaddingState
 import com.example.pohozhe.dataclasses.WetherState
 import com.example.pohozhe.dataclasses.WhetherData
 import com.example.pohozhe.dataclasses.Wind
 import com.example.pohozhe.ui.theme.PohozheTheme
+import com.example.pohozhe.views.LocationView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        window.statusBarColor = Color.TRANSPARENT
         setContent {
             PohozheTheme {
-                val (topInsetPx, bottomInsetPx) = getStatusAndNavBarHeight()
+                val navController = rememberNavController()
+                AppNavHost(navController)
+            }
+        }
+    }
+
+    @Composable
+    fun AppNavHost(navController: NavHostController) {
+        val (topInsetPx, bottomInsetPx) = getStatusAndNavBarHeight()
+        val viewModel = MainViewModel()
+        viewModel.paddingState = PaddingState(topInsetPx, bottomInsetPx)
+        NavHost(navController, startDestination = "home") {
+            composable("home") {
                 MainView(
-                    whetherData =  WhetherData(
-                        state =  WetherState("Хмарно", R.drawable.cloudy_wether_ico),
-                        temp = 19,
-                        hours = listOf(
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                            HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        ),
-                        days = listOf(
-                            DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                            DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                            DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                            DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                            DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
-                        ),
-                        huminidy = 12,
-                        rayny = 0.3F,
-                        wind = Wind(10, 122.2),
-                        uv_index = 5,
-                        pressure = 1222
-                    ),
-                    currentLocation = "Talne",
-                    statusPadding = topInsetPx,
-                    bottomPadding = bottomInsetPx,
-                    changeLocationFunction = {},
-                    settingsFunction = {}
+                    changeLocationFunction = {
+                        navController.navigate("locations")
+                    },
+                    settingsFunction = {},
+                    viewModel = viewModel
+                )
+            }
+            composable("locations") {
+                LocationView(
+                    modifier = Modifier,
+                    returnFunction = {
+                        navController.popBackStack()
+                    },
+                    SearchButtonClick = {
+
+                    },
+                    viewModel = viewModel
                 )
             }
         }
     }
+
 }
+
+
+

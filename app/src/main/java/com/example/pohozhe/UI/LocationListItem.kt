@@ -22,32 +22,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pohozhe.R
-import com.example.pohozhe.dataclasses.Coordinates
-import com.example.pohozhe.dataclasses.DayWhether
-import com.example.pohozhe.dataclasses.HourlyWhether
 import com.example.pohozhe.dataclasses.Location
-import com.example.pohozhe.dataclasses.LocationItem
-import com.example.pohozhe.dataclasses.WetherState
-import com.example.pohozhe.dataclasses.WhetherData
-import com.example.pohozhe.dataclasses.Wind
-import com.example.pohozhe.ui.theme.PohozheTheme
+import com.example.pohozhe.dataclasses.LocationCurrentWhetherState
 import com.skydoves.cloudy.cloudy
-import java.time.format.TextStyle
 
 
 @Composable
 fun LocationListItem (
     modifier: Modifier = Modifier,
-    location: LocationItem
+    location: Location,
+    whetherData: LocationCurrentWhetherState?
 ){
     Box(
         modifier = modifier
@@ -73,63 +64,129 @@ fun LocationListItem (
                 .fillMaxWidth()
                 .padding(15.dp)
         ) {
-            Box(
-                modifier =  Modifier
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        shape = RoundedCornerShape(size = 9.dp)
+            if (whetherData == null){
+                Box(
+                    modifier =  Modifier
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .width(74.dp)
+                        .height(74.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .padding(
+                            start = 15.dp,
+                            top = 15.dp,
+                            end = 15.dp,
+                            bottom = 15.dp
+                        )
+                ){
+                    Text(
+                        text = "?",
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontSize = 41.sp,
+                            lineHeight = 5.05.sp,
+                            fontFamily = FontFamily(Font(R.font.geologica)),
+                            fontWeight = FontWeight(900),
+                            color = Color(0xFFFFFFFF),
+                            textAlign = TextAlign.Center,
+                        ),
                     )
-                    .width(74.dp)
-                    .height(74.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        shape = RoundedCornerShape(size = 9.dp)
+                }
+                Box(
+                    modifier =  Modifier
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .height(74.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .padding(
+                            start = 15.dp,
+                            top = 15.dp,
+                            end = 15.dp,
+                            bottom = 15.dp
+                        )
+                ){
+                    Text(
+                        text = "?",
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontSize = 41.sp,
+                            lineHeight = 5.05.sp,
+                            fontFamily = FontFamily(Font(R.font.geologica)),
+                            fontWeight = FontWeight(900),
+                            color = Color(0xFFFFFFFF),
+                            textAlign = TextAlign.Center,
+                        ),
                     )
-                    .padding(
-                        start = 15.dp,
-                        top = 15.dp,
-                        end = 15.dp,
-                        bottom = 15.dp
+                }
+            } else{
+                Box(
+                    modifier =  Modifier
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .width(74.dp)
+                        .height(74.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .padding(
+                            start = 15.dp,
+                            top = 15.dp,
+                            end = 15.dp,
+                            bottom = 15.dp
+                        )
+                ){
+                    Image(
+                        painter = painterResource(id = whetherData.ico),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .aspectRatio(1F)
                     )
-            ){
-                Image(
-                    painter = painterResource(id = location.whetherData.state.Ico),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .aspectRatio(1F)
-                )
-            }
-            Box(
-                modifier =  Modifier
-                .border(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
-                    shape = RoundedCornerShape(size = 9.dp)
-                )
-                .height(74.dp)
-                .background(
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    shape = RoundedCornerShape(size = 9.dp)
-                )
-                .padding(
-                    start = 15.dp,
-                    top = 15.dp,
-                    end = 15.dp,
-                    bottom = 15.dp
-                )
-            ){
-                Text(
-                    text = location.whetherData.temp.toString() + "°",
-                    style = androidx.compose.ui.text.TextStyle(
-                        fontSize = 41.sp,
-                        lineHeight = 5.05.sp,
-                        fontFamily = FontFamily(Font(R.font.geologica)),
-                        fontWeight = FontWeight(900),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center,
-                    ),
-                )
+                }
+                Box(
+                    modifier =  Modifier
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .height(74.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = RoundedCornerShape(size = 9.dp)
+                        )
+                        .padding(
+                            start = 15.dp,
+                            top = 15.dp,
+                            end = 15.dp,
+                            bottom = 15.dp
+                        )
+                ){
+                    Text(
+                        text = whetherData.temp.toString() + "°",
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontSize = 41.sp,
+                            lineHeight = 5.05.sp,
+                            fontFamily = FontFamily(Font(R.font.geologica)),
+                            fontWeight = FontWeight(900),
+                            color = Color(0xFFFFFFFF),
+                            textAlign = TextAlign.Center,
+                        ),
+                    )
+                }
             }
             Spacer(
                 modifier = Modifier
@@ -152,70 +209,22 @@ fun LocationListItem (
                         top = 15.dp,
                         end = 15.dp,
                         bottom = 15.dp
-                    )
+                    ),
+                contentAlignment = Alignment.Center
 
             ){
                 Text(
-                    text = location.location.name,
+                    text = location.name,
                     style = androidx.compose.ui.text.TextStyle(
-                        fontSize = 41.sp,
-                        lineHeight = 5.05.sp,
+                        fontSize = 24.sp,
+                        lineHeight = 5.sp,
                         fontFamily = FontFamily(Font(R.font.geologica)),
                         fontWeight = FontWeight(900),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center,
-                    ),
+                    )
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewLocationListItem(){
-    PohozheTheme {
-        LocationListItem(
-            location = LocationItem(
-                Location(
-                    "Talte",
-                    Coordinates(
-                        12.231,
-                        21.213
-                    )
-                ),
-                WhetherData(
-                    state =  WetherState("Хмарно", R.drawable.cloudy_wether_ico),
-                    temp = 19,
-                    hours = listOf(
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                        HourlyWhether(R.drawable.cloudy_wether_ico,18, stringResource(R.string.now)),
-                    ),
-                    days = listOf(
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today),
-                        DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
-                    ),
-                    huminidy = 12,
-                    rayny = 0.3F,
-                    wind = Wind(10, 122.2),
-                    uv_index = 5,
-                    pressure = 1222
-                )
-            )
-        )
     }
 }

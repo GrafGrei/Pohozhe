@@ -24,14 +24,20 @@ import com.example.pohozhe.dataclasses.Wind
 
 
 @Composable
-fun MainSlide(modifier: Modifier = Modifier,bottomPadding: Int, statusPadding: PaddingValues, whetherData: WhetherData){
+fun MainSlide(
+    modifier: Modifier = Modifier,
+    innerPadding: Dp,
+    whetherData: WhetherData,
+    statusPadding: Int,
+    bottonPadding: Int
+){
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .verticalScroll(state = rememberScrollState())
-            .padding(bottom = bottomPadding.dp)
-            .padding(statusPadding),
+            .padding(top =  innerPadding)
+            .padding(top = (statusPadding+20).dp, bottom = bottonPadding.dp)
+            .verticalScroll(state = rememberScrollState()),
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
