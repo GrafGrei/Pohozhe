@@ -1,9 +1,10 @@
-package com.example.pohozhe.DataProcessing
+package com.example.pohozhe.DataProcessing.uiData
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.LayoutDirection
 
 data class InsetsDp(
     val top: Int,
@@ -19,7 +20,7 @@ fun getStatusAndNavBarHeight(): InsetsDp {
     return InsetsDp(
         top = insets.asPaddingValues().calculateTopPadding().value.toInt(),
         bottom = insets.asPaddingValues().calculateBottomPadding().value.toInt(),
-        left = insets.asPaddingValues().calculateLeftPadding(layoutDirection = androidx.compose.ui.unit.LayoutDirection.Ltr).value.toInt(),
-        right = insets.asPaddingValues().calculateRightPadding(layoutDirection = androidx.compose.ui.unit.LayoutDirection.Ltr).value.toInt()
+        left = insets.asPaddingValues().calculateLeftPadding(layoutDirection = LayoutDirection.Ltr).value.toInt(),
+        right = insets.asPaddingValues().calculateRightPadding(layoutDirection = LayoutDirection.Ltr).value.toInt()
     )
 }

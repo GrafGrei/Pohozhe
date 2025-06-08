@@ -1,4 +1,4 @@
-package com.example.pohozhe.DataProcessing
+package com.example.pohozhe.DataProcessing.uiData
 
 import com.example.pohozhe.R
 import java.util.Locale

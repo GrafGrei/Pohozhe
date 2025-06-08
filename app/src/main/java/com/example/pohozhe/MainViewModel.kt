@@ -1,8 +1,6 @@
 package com.example.pohozhe
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import com.example.pohozhe.dataclasses.Coordinates
 import com.example.pohozhe.dataclasses.DayWhether
@@ -18,6 +16,10 @@ import com.example.pohozhe.dataclasses.PaddingState
 
 
 class MainViewModel: ViewModel() {
+
+    var language: String = "EN"
+
+    var locationPermissionGranted: Boolean = false
 
     var paddingState by mutableStateOf<PaddingState?>(null)
 
@@ -51,17 +53,6 @@ class MainViewModel: ViewModel() {
             uv_index = 5,
             pressure = 1222
         )
-        currentLocation = Location(
-            name = "HUILANDIA",
-            coordinates = Coordinates(12.2412, 12.242)
-        )
-        currentLocationWetherState = LocationCurrentWhetherState(
-            ico = R.drawable.cloudy_wether_ico,
-            temp = 12
-        )
-        locationsList = listOf(
-            Pair(Location("Talne", Coordinates(50.45, 30.52)), null),
-            Pair(Location("Talne", Coordinates(50.45, 30.52)), LocationCurrentWhetherState(R.drawable.cloudy_wether_ico, 124))
-        )
+        currentLocation = Location(Coordinates(1.2,1.2),"test")
     }
 }

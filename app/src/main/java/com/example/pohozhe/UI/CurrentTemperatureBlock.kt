@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.pohozhe.DataProcessing.getLocalizedDegreesText
+import com.example.pohozhe.DataProcessing.uiData.getLocalizedDegreesText
 import com.example.pohozhe.R
 import com.example.pohozhe.ui.theme.PohozheTheme
 
