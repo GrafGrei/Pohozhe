@@ -19,6 +19,7 @@ import com.example.pohozhe.views.MainView
 import com.example.pohozhe.dataclasses.PaddingState
 import com.example.pohozhe.ui.theme.PohozheTheme
 import com.example.pohozhe.views.LocationView
+import com.example.pohozhe.DataProcessing.uiData.APIProcessing.GetWhether
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +45,19 @@ class MainActivity : ComponentActivity() {
 
         viewModel.paddingState = PaddingState(topInsetPx, bottomInsetPx)
 
-        RequestLocationPermissionOnce { isGranted ->
-            viewModel.locationPermissionGranted = isGranted
-        }
-        println(viewModel.locationPermissionGranted)
+//        RequestLocationPermissionOnce { isGranted ->
+//            viewModel.locationPermissionGranted = isGranted
+//        }
+//        println(viewModel.locationPermissionGranted)
+//
+//
+//        if (viewModel.locationPermissionGranted){
+//            GetCurrentLocation(viewModel)
+//        }
 
-
-        if (viewModel.locationPermissionGranted){
-            GetCurrentLocation(viewModel)
-        }
-
+        GetWhether(
+            viewModel = viewModel
+        )
 
 
         NavHost(navController, startDestination = "home") {

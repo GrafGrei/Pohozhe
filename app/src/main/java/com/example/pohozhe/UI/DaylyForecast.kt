@@ -132,7 +132,7 @@ fun DaylyForecast(modifier: Modifier = Modifier, days: List<DayWhether>){
                             .height(32.dp)
                     )
                     Text(
-                        text = stringResource(days[it].date),
+                        text = days[it].date,
                         style = TextStyle(
                             fontSize = 12.sp,
                             lineHeight = 14.sp,

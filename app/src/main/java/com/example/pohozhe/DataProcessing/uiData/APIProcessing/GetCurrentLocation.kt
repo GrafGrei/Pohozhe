@@ -29,7 +29,7 @@ fun GetCurrentLocation(
             val result = NominatimClient.api.getLocationName(
                 lat = lat,
                 lon = lon,
-                language = viewModel.language
+                language = "EN"
             )
             val address = result.address
             val formatted = listOfNotNull(

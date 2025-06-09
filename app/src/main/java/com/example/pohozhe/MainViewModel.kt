@@ -17,8 +17,6 @@ import com.example.pohozhe.dataclasses.PaddingState
 
 class MainViewModel: ViewModel() {
 
-    var language: String = "EN"
-
     var locationPermissionGranted: Boolean = false
 
     var paddingState by mutableStateOf<PaddingState?>(null)
@@ -45,7 +43,7 @@ class MainViewModel: ViewModel() {
                 HourlyWhether(R.drawable.cloudy_wether_ico,18, "now")
             },
             days = List(5) {
-                DayWhether(23, 12, R.drawable.cloudy_wether_ico, R.string.today)
+                DayWhether(23, 12, R.drawable.cloudy_wether_ico, "3")
             },
         huminidy = 12,
             rayny = 0.3F,
@@ -53,6 +51,6 @@ class MainViewModel: ViewModel() {
             uv_index = 5,
             pressure = 1222
         )
-        currentLocation = Location(Coordinates(1.2,1.2),"test")
+        currentLocation = Location(Coordinates(48.87491545504901, 30.701794479128473),"Тальне")
     }
 }
